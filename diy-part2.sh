@@ -82,3 +82,8 @@ EOF
 # =========================================================
 # 脚本结束
 # =========================================================
+
+# ==== custom: enable PassWall + sing-box, disable ssr-plus ====
+sed -i 's/^# CONFIG_PACKAGE_luci-app-passwall is not set$/CONFIG_PACKAGE_luci-app-passwall=y/' .config
+sed -i 's/^# CONFIG_PACKAGE_sing-box is not set$/CONFIG_PACKAGE_sing-box=y/' .config
+sed -i 's/^CONFIG_PACKAGE_luci-app-ssr-plus=y$/# CONFIG_PACKAGE_luci-app-ssr-plus is not set/' .config
