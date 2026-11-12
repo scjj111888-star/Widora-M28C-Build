@@ -87,3 +87,14 @@ EOF
 sed -i 's/^# CONFIG_PACKAGE_luci-app-passwall is not set$/CONFIG_PACKAGE_luci-app-passwall=y/' .config
 sed -i 's/^# CONFIG_PACKAGE_sing-box is not set$/CONFIG_PACKAGE_sing-box=y/' .config
 sed -i 's/^CONFIG_PACKAGE_luci-app-ssr-plus=y$/# CONFIG_PACKAGE_luci-app-ssr-plus is not set/' .config
+
+
+# ==== opt: disable OpenClash (use passwall+sing-box only) ====
+sed -i 's/^CONFIG_PACKAGE_luci-app-openclash=y$/# CONFIG_PACKAGE_luci-app-openclash is not set/' .config
+
+# ==== opt: add 4G swap to prevent OOM during Go compilation ====
+sudo fallocate -l 4G /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=4096
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+free -h
